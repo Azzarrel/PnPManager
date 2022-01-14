@@ -1,0 +1,127 @@
+﻿<UserControl x:Class="PnPManager.ActionBoard.View.ActorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PnPManager.ActionBoard.View" 
+             xmlns:converter="clr-namespace:PnPManager.ActionBoard.Converter" 
+             xmlns:viewmodel="clr-namespace:PnPManager.ActionBoard.ViewModel" 
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance Type=viewmodel:ActorViewModel, IsDesignTimeCreatable=False}"
+             d:DesignHeight="450" d:DesignWidth="800">
+  <UserControl.Resources>
+    <converter:AttributeFilter x:Key="AttributeFilter"/>
+    <converter:ResourceFilter x:Key="ResourceFilter"/>
+    <converter:SolidColorConvertere x:Key="ColorConverter"/>
+  </UserControl.Resources>
+  <Grid Margin="10,10,10,10" DataContext="{Binding SelectedActor}">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="1*"/>
+      <ColumnDefinition Width="1*"/>
+    </Grid.ColumnDefinitions>
+      
+    <Grid Grid.Column="0">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="2*"/>
+        <RowDefinition Height="4*"/>
+      </Grid.RowDefinitions>
+      <!-- Charinfo -->
+      <Grid  Grid.Row="0">
+        <StackPanel>
+          <StackPanel Orientation="Horizontal" Margin="0,0,0,3">
+            <TextBlock FontSize="18" FontWeight="Bold" Text="{Binding Name}" MinWidth="70" Margin="0,0,4,0" TextDecorations="Underline"/>
+            <TextBlock FontSize="16" FontWeight="Bold" Text="{Binding Path=ActionPoints, StringFormat= '(AP: \{0\})'}" VerticalAlignment="Bottom" Margin="0,0,0,2"/>
+          </StackPanel>
+          <TextBlock Text="{Binding Description}"/>
+        </StackPanel>
+      </Grid>
+      <!-- Stats -->
+      <Grid Grid.Row="1" >
+        <StackPanel>
+          <ItemsControl ItemsSource="{Binding Attributes, Converter={StaticResource AttributeFilter}}" Margin="0,5,0,5">
+          <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+              <StackPanel Orientation="Horizontal"/>
+            </ItemsPanelTemplate>
+          </ItemsControl.ItemsPanel>
+          <ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <Border BorderBrush="Black" BorderThickness="0.5" Margin="0,0,5,0">
+              <StackPanel Orientation="Horizontal" >
+                  <TextBlock FontSize="16" FontWeight="Bold" Text="{Binding  Path=Tag, StringFormat='\{0\}:'}" Margin="0,0,2,0"/>
+                    <TextBlock Text="{Binding Value}" VerticalAlignment="Bottom" Margin="0,0,2,0"/>
+              </StackPanel>
+                </Border>
+              </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <!-- HP, ST, MA -->
+        <ItemsControl ItemsSource="{Binding Attributes, Converter={StaticResource ResourceFilter}}">
+          <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+              <StackPanel/>
+            </ItemsPanelTemplate>
+          </ItemsControl.ItemsPanel>
+          <ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <Grid Margin="0,0,0,1">
+                  <ProgressBar Height="28" Maximum="{Binding Value}" Value="{Binding CurrentValue}" Foreground="{Binding Color, Converter={StaticResource ColorConverter}}"/>
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">
+                  <TextBlock.Text>
+                    <MultiBinding StringFormat=" {0} ( {1} / {2} )">
+                      <Binding Path="Tag"/>
+                      <Binding Path="CurrentValue"/>
+                      <Binding Path="Value"/>
+                    </MultiBinding>
+                  </TextBlock.Text>
+                </TextBlock>
+                </Grid>
+              </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+          <StackPanel Orientation="Horizontal" Height="30"/>
+        </StackPanel>
+        </Grid>
+    </Grid>
+    <Grid Grid.Column="1">
+      <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="25,20,0,0">
+        <StackPanel Margin="0,0,15,0">
+          <ToggleButton Name="attacks" Height="40" Width="40">
+            <Image Source="/Images/icon-sword-22.png" />
+          </ToggleButton>
+          <Popup IsOpen="{Binding IsChecked, ElementName=attacks}" StaysOpen="False" Placement="Relative">
+            <ListBox ItemsSource="{Binding AttackActions}">
+              <ListBox.ItemTemplate>
+                <DataTemplate>
+                  <Grid Height="20" MaxWidth="180">
+                    <TextBlock Text="{Binding Name}" FontSize="11" />
+                  </Grid>
+                </DataTemplate>
+              </ListBox.ItemTemplate>
+            </ListBox>
+          </Popup>
+        </StackPanel>
+        <StackPanel Margin="0,0,15,0">
+          <ToggleButton Name="moves" Height="40" Width="40">
+            <Image Source="/Images/boot-icon-1.png" />
+          </ToggleButton>
+          <Popup IsOpen="{Binding IsChecked, ElementName=moves}" StaysOpen="False" Placement="Relative">
+              <Border Background="LightYellow">
+                <TextBlock>I'm the popup</TextBlock>
+              </Border>
+            </Popup>
+          </StackPanel>
+        <StackPanel Margin="0,0,15,0">
+          <ToggleButton Name="special" Height="40" Width="40">
+            <Image Source="/Images/asterisk-512.png" />
+          </ToggleButton>
+          <Popup IsOpen="{Binding IsChecked, ElementName=special}" StaysOpen="False" Placement="Relative" >
+            <ListBox>
+              
+            </ListBox>
+          </Popup>
+        </StackPanel>
+
+      </StackPanel>
+    </Grid>
+  </Grid>
+</UserControl>
