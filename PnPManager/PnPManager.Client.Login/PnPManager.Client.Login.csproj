@@ -1,12 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <OutputType>Library</OutputType>
     <TargetFramework>net6.0-windows</TargetFramework>
-    <UseWPF>true</UseWPF>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
+    <UseWPF>true</UseWPF> 
   </PropertyGroup>
-
 
   <ItemDefinitionGroup>
     <Reference>
@@ -26,16 +25,28 @@
       <ReferenceCopyLocalPaths Condition=" '%(ReferenceCopyLocalPaths.NuGetPackageId)' != '' " Update="%(ReferenceCopyLocalPaths)" DestinationSubDirectory="ref\" />
     </ItemGroup>
   </Target>
+
   
   <ItemGroup>
-    <Folder Include="ViewModel\" />
-    <Folder Include="View\" />
+    <ProjectReference Include="..\PnPManager.Client.Configuration\PnPManager.Client.Configuration.csproj" />
+    <ProjectReference Include="..\PnPManager.Client.Core\PnPManager.Client.Core.csproj" />
+    <ProjectReference Include="..\PnPManager.Client.Elements\PnPManager.Client.Elements.csproj" />
+    <ProjectReference Include="..\PnPManager.Client.Essentials\PnPManager.Client.Essentials.csproj" />
+    <ProjectReference Include="..\PnPManager.Client.Main\PnPManager.Client.Main.csproj" />
+    <ProjectReference Include="..\PnPManager.Client.Structure\PnPManager.Client.Structure.csproj" />
   </ItemGroup>
 
+
   <ItemGroup>
-    <ProjectReference Include="..\PnPManager.Client.Essentials\PnPManager.Client.Essentials.csproj" />
-    <ProjectReference Include="..\PnPManager.Client.Main.Interfaces\PnPManager.Client.Main.Interfaces.csproj" />
-    <ProjectReference Include="..\PnPManager.Client.Main\PnPManager.Client.Main.csproj" />
+    <Page Update="Themes\Generic.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
 
 </Project>

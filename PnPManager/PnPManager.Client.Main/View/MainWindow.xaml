@@ -1,0 +1,52 @@
+﻿<Window x:Class="PnPManager.Client.Main.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PnPManager.Client.Main.View"
+        xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz" 
+        xmlns:vm="clr-namespace:PnPManager.Client.Main.ViewModel"
+        mc:Ignorable="d" d:DataContext="{d:DesignInstance Type=vm:MainWindowViewModel}" 
+        Title="MainWindow" Height="450" Width="800">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="15*"/>
+      <RowDefinition Height="80*"/>
+      <RowDefinition Height="5*"/>
+    </Grid.RowDefinitions>
+    <Grid Grid.Row="0">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="80*"/>
+        <ColumnDefinition Width="20*"/>
+      </Grid.ColumnDefinitions>
+      <Grid Grid.Column="0">
+
+      </Grid>
+      <Grid Grid.Column="1">
+
+      </Grid>
+    </Grid>
+    <Grid Grid.Row="1">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="80*"/>
+        <ColumnDefinition Width="20*"/>
+      </Grid.ColumnDefinitions>
+      <Grid Grid.Column="0">
+        <dragablz:TabablzControl ItemsSource="{Binding Modules}">
+          <dragablz:TabablzControl.ItemContainerStyle>
+            <Style TargetType="TabItem"></Style>
+          </dragablz:TabablzControl.ItemContainerStyle>
+          <dragablz:TabablzControl.Resources>
+
+          </dragablz:TabablzControl.Resources>
+        </dragablz:TabablzControl>
+      </Grid>
+      <Grid Grid.Column="1">
+        <local:SideBar/>
+      </Grid>
+    </Grid>
+    <Grid Grid.Row="2">
+      <local:MessageBar/>
+    </Grid>
+  </Grid>
+</Window>

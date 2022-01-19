@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0-windows</TargetFramework>
@@ -6,6 +6,7 @@
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
   </PropertyGroup>
+
 
 
   <ItemDefinitionGroup>
@@ -26,16 +27,5 @@
       <ReferenceCopyLocalPaths Condition=" '%(ReferenceCopyLocalPaths.NuGetPackageId)' != '' " Update="%(ReferenceCopyLocalPaths)" DestinationSubDirectory="ref\" />
     </ItemGroup>
   </Target>
-  
-  <ItemGroup>
-    <Folder Include="ViewModel\" />
-    <Folder Include="View\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\PnPManager.Client.Essentials\PnPManager.Client.Essentials.csproj" />
-    <ProjectReference Include="..\PnPManager.Client.Main.Interfaces\PnPManager.Client.Main.Interfaces.csproj" />
-    <ProjectReference Include="..\PnPManager.Client.Main\PnPManager.Client.Main.csproj" />
-  </ItemGroup>
 
 </Project>

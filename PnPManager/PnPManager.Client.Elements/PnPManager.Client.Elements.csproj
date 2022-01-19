@@ -7,6 +7,9 @@
     <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PnpManager.Client.Elements.Interfaces\PnpManager.Client.Elements.Interfaces.csproj" />
+  </ItemGroup>
 
   <ItemDefinitionGroup>
     <Reference>
@@ -26,16 +29,6 @@
       <ReferenceCopyLocalPaths Condition=" '%(ReferenceCopyLocalPaths.NuGetPackageId)' != '' " Update="%(ReferenceCopyLocalPaths)" DestinationSubDirectory="ref\" />
     </ItemGroup>
   </Target>
+
   
-  <ItemGroup>
-    <Folder Include="ViewModel\" />
-    <Folder Include="View\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\PnPManager.Client.Essentials\PnPManager.Client.Essentials.csproj" />
-    <ProjectReference Include="..\PnPManager.Client.Main.Interfaces\PnPManager.Client.Main.Interfaces.csproj" />
-    <ProjectReference Include="..\PnPManager.Client.Main\PnPManager.Client.Main.csproj" />
-  </ItemGroup>
-
 </Project>

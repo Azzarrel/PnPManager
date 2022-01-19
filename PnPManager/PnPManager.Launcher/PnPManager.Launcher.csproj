@@ -1,10 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
   </PropertyGroup>
 
 
@@ -18,7 +20,7 @@
   </ItemDefinitionGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>../../_DebugClient/lib</OutputPath>
+    <OutputPath>../../_DebugClient</OutputPath>
   </PropertyGroup>
 
   <Target Name="CopyPackageAssembliesToSubFolder" AfterTargets="ResolveReferences">
@@ -26,16 +28,5 @@
       <ReferenceCopyLocalPaths Condition=" '%(ReferenceCopyLocalPaths.NuGetPackageId)' != '' " Update="%(ReferenceCopyLocalPaths)" DestinationSubDirectory="ref\" />
     </ItemGroup>
   </Target>
-  
-  <ItemGroup>
-    <Folder Include="ViewModel\" />
-    <Folder Include="View\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\PnPManager.Client.Essentials\PnPManager.Client.Essentials.csproj" />
-    <ProjectReference Include="..\PnPManager.Client.Main.Interfaces\PnPManager.Client.Main.Interfaces.csproj" />
-    <ProjectReference Include="..\PnPManager.Client.Main\PnPManager.Client.Main.csproj" />
-  </ItemGroup>
 
 </Project>
